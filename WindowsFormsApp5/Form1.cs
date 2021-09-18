@@ -176,4 +176,4 @@ namespace WindowsFormsApp5
     }
 }
 
-// 20210918 使用数据接受函数，并增加跨线程访问
+
