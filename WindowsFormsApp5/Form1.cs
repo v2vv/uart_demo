@@ -36,7 +36,7 @@ namespace WindowsFormsApp5
             //}
 
 
-            serialPort1.BaudRate = 9600;
+            serialPort1.BaudRate = 115200;
             serialPort1.DataBits = 8;
             serialPort1.StopBits = (StopBits)1;
 
@@ -61,11 +61,12 @@ namespace WindowsFormsApp5
                 comboBox4.Items.Add(str);
             }
 
-            comboBox2.Text = "9600";
+            comboBox2.Text = "115200";
             comboBox3.Text = "8";
             comboBox4.Text = "1";
 
             serialPort1.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//添加事件
+            
 
         }
         #endregion
@@ -105,6 +106,10 @@ namespace WindowsFormsApp5
                     serialPort1.DataBits = Convert.ToInt32(comboBox3.Text);
                     serialPort1.StopBits = (StopBits)Convert.ToInt32(comboBox4.Text);
                     serialPort1.Open();
+                    changeButtonTextAndPicture();
+
+                    //string time = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
+                    //richTextBox1.AppendText("-----\r\n" + "system_date：" + time + "\r\n-----");
                 }
                 catch
                 {
@@ -117,6 +122,7 @@ namespace WindowsFormsApp5
                 try
                 {
                     serialPort1.Close();
+                    changeButtonTextAndPicture();
                 }
                 catch
                 {
@@ -137,10 +143,12 @@ namespace WindowsFormsApp5
             {
                 // button1.Image = Properties.Resources.on;
                 button1.Text = "关闭串口";
+                comboBox1.Enabled = false;
             }
             else
             {
                 //button1.Image = Properties.Resources.off;
+                comboBox1.Enabled = true;
                 button1.Text = "打开串口";
             }
         }
@@ -172,6 +180,26 @@ namespace WindowsFormsApp5
             }
         }
         #endregion
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            //richTextBox1.SaveFile("txtName", RichTextBoxStreamType.PlainText);
+            if (this.richTextBox1.Text == "")
+                return;
+            //saveFileDialog1.DefaultExt = "txt";
+            saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (this.saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            string FileName = this.saveFileDialog1.FileName;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && FileName.Length > 0)
+            {
+                // Save the contents of the RichTextBox into the file.
+                richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                MessageBox.Show("文件已成功保存");
+            }
+        }
 
     }
 }
