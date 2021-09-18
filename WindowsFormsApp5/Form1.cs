@@ -17,7 +17,7 @@ namespace WindowsFormsApp5
         SerialPort serialPort1 = new SerialPort();
         public Form1()
         {
-
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//设置该属性 为false
             InitializeComponent();
         }
 
@@ -65,7 +65,7 @@ namespace WindowsFormsApp5
             comboBox3.Text = "8";
             comboBox4.Text = "1";
 
-            // serialPort1.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//添加事件
+            serialPort1.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//添加事件
 
         }
         #endregion
@@ -78,6 +78,7 @@ namespace WindowsFormsApp5
                 string str = serialPort1.ReadExisting();//字符串方式读
                 richTextBox1.AppendText(str);    //添加内容
                 RxCount += str.Length;
+
 
             }
             else
@@ -100,7 +101,7 @@ namespace WindowsFormsApp5
                 try
                 {
                     serialPort1.PortName = comboBox1.Text;
-                    serialPort1.BaudRate = Convert.ToInt32(comboBox1.Text);
+                    serialPort1.BaudRate = Convert.ToInt32(comboBox2.Text);
                     serialPort1.DataBits = Convert.ToInt32(comboBox3.Text);
                     serialPort1.StopBits = (StopBits)Convert.ToInt32(comboBox4.Text);
                     serialPort1.Open();
@@ -129,9 +130,26 @@ namespace WindowsFormsApp5
         }
         #endregion
 
+        #region 根据串口状态切换按键名称和指示灯图片
+        private void changeButtonTextAndPicture()
+        {
+            if (serialPort1.IsOpen)
+            {
+                // button1.Image = Properties.Resources.on;
+                button1.Text = "关闭串口";
+            }
+            else
+            {
+                //button1.Image = Properties.Resources.off;
+                button1.Text = "打开串口";
+            }
+        }
+        #endregion
+
+
 
         #region 清空接收计数器和接收显示区域
-        private void button4_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
             RxCount = 0;
@@ -158,3 +176,4 @@ namespace WindowsFormsApp5
     }
 }
 
+// 20210918 使用数据接受函数，并增加跨线程访问
