@@ -17,6 +17,7 @@ namespace WindowsFormsApp5
         SerialPort serialPort1 = new SerialPort();
         public Form1()
         {
+            serialPort1.Encoding = Encoding.GetEncoding("GB2312");
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//设置该属性 为false
             InitializeComponent();
         }
@@ -77,6 +78,7 @@ namespace WindowsFormsApp5
             if (!checkBox2.Checked)//没有勾选hex时候，按照字符串方式读取
             {
                 string str = serialPort1.ReadExisting();//字符串方式读
+
                 richTextBox1.AppendText(str);    //添加内容
                 RxCount += str.Length;
 
@@ -84,8 +86,6 @@ namespace WindowsFormsApp5
                 //显示接收区域最后一行
                 richTextBox1.SelectionStart = richTextBox1.TextLength;
                 richTextBox1.ScrollToCaret();
-
-
 
             }
             else
@@ -231,7 +231,7 @@ namespace WindowsFormsApp5
                         try
                         {
                             serialPort1.Write(textBox1.Text);
-                            richTextBox1.AppendText("\r\n"+textBox1.Text+ "\r\n发送成功");
+                            //richTextBox1.AppendText("\r\n"+textBox1.Text+ "\r\n发送成功\r\n");
                             view_last_line();
 
                             if (checkBox3.Checked)
@@ -359,11 +359,21 @@ namespace WindowsFormsApp5
             }
         }
         #endregion
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label_ReceiveCount_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
 
 // 20210918 使用数据接受函数，并增加跨线程访问；
 // 20210922 增加文本框自动显示最新内容；
-// 20210922 修复显示BUG,增加单行，多行发送UI及代码，并打印至接收区域，增加文本
+// 20210922 修复显示BUG,增加单行，多行发送UI及代码，并打印至接收区域，增加文本, 增加中文支持
 
