@@ -81,6 +81,14 @@ namespace WindowsFormsApp5
                 RxCount += str.Length;
 
 
+                //让文本框获取焦点 
+                this.richTextBox1.Focus();
+                //设置光标的位置到文本尾 
+                this.richTextBox1.Select(this.richTextBox1.TextLength, 0);
+                //滚动到控件光标处 
+                this.richTextBox1.ScrollToCaret();
+
+
             }
             else
             {
@@ -201,8 +209,13 @@ namespace WindowsFormsApp5
             }
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
 
 // 20210918 使用数据接受函数，并增加跨线程访问
+// 20210922 增加文本框自动显示最新内容
