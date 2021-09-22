@@ -49,8 +49,17 @@ namespace WindowsFormsApp5
             this.label_ReceiveCount = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -213,7 +222,7 @@ namespace WindowsFormsApp5
             this.groupBox2.Controls.Add(this.label_ReceiveCount);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.richTextBox1);
-            this.groupBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(255, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1157, 450);
@@ -237,7 +246,7 @@ namespace WindowsFormsApp5
             this.label_ReceiveCount.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.label_ReceiveCount.Location = new System.Drawing.Point(53, 432);
             this.label_ReceiveCount.Name = "label_ReceiveCount";
-            this.label_ReceiveCount.Size = new System.Drawing.Size(15, 15);
+            this.label_ReceiveCount.Size = new System.Drawing.Size(16, 15);
             this.label_ReceiveCount.TabIndex = 2;
             this.label_ReceiveCount.Text = "0";
             // 
@@ -246,7 +255,7 @@ namespace WindowsFormsApp5
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(30, 410);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 15);
+            this.label7.Size = new System.Drawing.Size(41, 15);
             this.label7.TabIndex = 1;
             this.label7.Text = "Rx：";
             // 
@@ -254,6 +263,7 @@ namespace WindowsFormsApp5
             // 
             this.richTextBox1.AutoWordSelection = true;
             this.richTextBox1.EnableAutoDragDrop = true;
+            this.richTextBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox1.Location = new System.Drawing.Point(21, 30);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
@@ -262,11 +272,100 @@ namespace WindowsFormsApp5
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.button5);
+            this.groupBox3.Controls.Add(this.checkBox3);
+            this.groupBox3.Controls.Add(this.button4);
+            this.groupBox3.Controls.Add(this.richTextBox2);
+            this.groupBox3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox3.Location = new System.Drawing.Point(19, 480);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1386, 219);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "发送区域";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.AutoWordSelection = true;
+            this.richTextBox2.EnableAutoDragDrop = true;
+            this.richTextBox2.Location = new System.Drawing.Point(47, 24);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.richTextBox2.Size = new System.Drawing.Size(1241, 122);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.Text = "";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(1294, 24);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(81, 122);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "发送";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox3.Location = new System.Drawing.Point(1199, 171);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(93, 19);
+            this.checkBox3.TabIndex = 11;
+            this.checkBox3.Text = "发送新行";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(1294, 161);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(81, 37);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "发送";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(96, 170);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(1097, 25);
+            this.textBox1.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(22, 43);
+            this.label8.Name = "label8";
+            this.label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label8.Size = new System.Drawing.Size(19, 84);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "多行发送";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(22, 175);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(71, 15);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "单行发送";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1424, 477);
+            this.ClientSize = new System.Drawing.Size(1424, 734);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -276,6 +375,8 @@ namespace WindowsFormsApp5
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -302,6 +403,14 @@ namespace WindowsFormsApp5
         private System.Windows.Forms.Label label_ReceiveCount;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }
 

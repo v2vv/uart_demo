@@ -81,12 +81,10 @@ namespace WindowsFormsApp5
                 RxCount += str.Length;
 
 
-                //让文本框获取焦点 
-                this.richTextBox1.Focus();
-                //设置光标的位置到文本尾 
-                this.richTextBox1.Select(this.richTextBox1.TextLength, 0);
-                //滚动到控件光标处 
-                this.richTextBox1.ScrollToCaret();
+                //显示接收区域最后一行
+                richTextBox1.SelectionStart = richTextBox1.TextLength;
+                richTextBox1.ScrollToCaret();
+
 
 
             }
@@ -213,9 +211,159 @@ namespace WindowsFormsApp5
         {
 
         }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+
+        #region 单行发送
+        private void button5_Click(object sender, EventArgs e)
+        {
+            byte[] Data = new byte[1];
+            if (serialPort1.IsOpen)
+            {
+                if (textBox1.Text != "")
+                {
+                    if (!checkBox1.Checked)//发送模式是字符模式
+                    {
+                        try
+                        {
+                            serialPort1.Write(textBox1.Text);
+                            richTextBox1.AppendText("\r\n"+textBox1.Text+ "\r\n发送成功");
+                            view_last_line();
+
+                            if (checkBox3.Checked)
+                                serialPort1.Write("\r\n");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("端口发送失败，系统将关闭当前串口", "错误");
+                            serialPort1.Close();//关闭串口
+                        }
+                    }
+
+                    else
+                    {
+                        if (textBox1.Text.Length % 2 == 0)//偶数个数字
+                        {
+                            for (int i = 0; i < textBox1.Text.Length / 2; i++)
+                            {
+                                try
+                                {
+                                    Data[0] = Convert.ToByte(textBox1.Text.Substring(i * 2, 2), 16);
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("请核对输入的十六进制数据格式", "错误");
+
+                                }
+
+
+                                try
+                                {
+                                    serialPort1.Write(Data, 0, 1);
+                                    view_last_line();
+
+                                    if (checkBox3.Checked)
+                                        serialPort1.Write("\r\n");
+
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("端口发送失败，系统将关闭当前串口", "错误");
+                                    serialPort1.Close();//关闭串口
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("请输入偶数个16进制数字", "错误");
+                        }
+                    }
+                }
+            }
+          
+        #endregion
+        }
+
+        private void view_last_line()
+        {
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.ScrollToCaret();
+        }
+
+            
+
+        #region 多行发送
+        private void button4_Click(object sender, EventArgs e)
+        {
+            byte[] Data = new byte[1];
+            if (serialPort1.IsOpen)
+            {
+                if (richTextBox2.Text != "")
+                {
+                    if (!checkBox1.Checked)//发送模式是字符模式
+                    {
+                        try
+                        {
+                            serialPort1.Write(richTextBox2.Text);
+                            richTextBox1.AppendText("\r\n" + richTextBox2.Text + "\r\n发送成功");
+                            view_last_line();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("端口发送失败，系统将关闭当前串口", "错误");
+                            serialPort1.Close();//关闭串口
+                        }
+                    }
+                    else
+                    {
+                        if (richTextBox2.Text.Length % 2 == 0)//偶数个数字
+                        {
+                            for (int i = 0; i < richTextBox2.Text.Length / 2; i++)
+                            {
+                                try
+                                {
+                                    Data[0] = Convert.ToByte(richTextBox2.Text.Substring(i * 2, 2), 16);
+
+
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("请核对输入的十六进制数据格式", "错误");
+
+                                }
+
+
+                                try
+                                {
+                                    serialPort1.Write(Data, 0, 1);
+                                    richTextBox1.AppendText("\r\n" + Data[0] + "\r\n发送成功\r\n");
+                                    view_last_line();
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("端口发送失败，系统将关闭当前串口", "错误");
+                                    serialPort1.Close();//关闭串口
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("请输入偶数个16进制数字", "错误");
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }
 
 
-// 20210918 使用数据接受函数，并增加跨线程访问
-// 20210922 增加文本框自动显示最新内容
+// 20210918 使用数据接受函数，并增加跨线程访问；
+// 20210922 增加文本框自动显示最新内容；
+// 20210922 修复显示BUG,增加单行，多行发送UI及代码，并打印至接收区域，增加文本
+
